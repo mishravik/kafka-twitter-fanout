@@ -14,5 +14,9 @@
     "json-bigint": "^0.2.0",
     "lodash": "^4.15.0",
     "no-kafka": "git://github.com/crcastle/kafka.git#3.0"
+  },
+ "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 3.0.0"
   }
 }
