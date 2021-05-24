@@ -8,6 +8,7 @@ var JSONbig = require('json-bigint');  // standard JSON library cannot handle si
 const Kafka = require('no-kafka');
 const consumerTopic = process.env.KAFKA_TOPIC;
 const configTopic = process.env.KAFKA_CONFIG_TOPIC;
+const kafkaPrefix = process.env.KAFKA_PREFIX;
 
 /*
  * TODO: replace the env var by reading the comma-separated list of terms from the 'config' topic
@@ -78,7 +79,7 @@ const dataHandler = function (messageSet, topic, partition) {
             }
 
             producer.send({
-                topic: 'unknown-keyword',
+                topic: kafkaPrefix+'unknown-keyword',
                 partition: 0,
                 message: {
                     value: JSONbig.stringify(tweet)
@@ -93,7 +94,7 @@ const dataHandler = function (messageSet, topic, partition) {
             // console.log('----> Sending tweet to topic', keyword);
             // console.log(tweet);
             return producer.send({
-                topic: `${keyword}-keyword`,
+                topic: kafkaPrefix + `${keyword}-keyword`,
                 partition: 0,
                 message: {
                     value: JSONbig.stringify(tweet)
